@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    username: test
+    password: 1234
+    url: jdbc:mysql://localhost:3306/minsung
+  jpa:
+    hibernate:
+      ddl-auto: create
