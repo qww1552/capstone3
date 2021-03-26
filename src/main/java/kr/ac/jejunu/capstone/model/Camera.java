@@ -10,4 +10,5 @@ import javax.persistence.Id;
 public class Camera {
     @Id
     private Integer cid;
+//    private Station station;
 }
