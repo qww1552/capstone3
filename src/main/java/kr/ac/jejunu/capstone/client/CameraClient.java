@@ -1,20 +1,27 @@
 package kr.ac.jejunu.capstone.client;
 
-import kr.ac.jejunu.capstone.Repository.CameraRepository;
-import kr.ac.jejunu.capstone.model.Camera;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+
+import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
 
 public class CameraClient {
-    @Autowired
-    private CameraRepository cameraRepository;
-    private String baseUrl;
-    public String getCamera() {
-        String reqUrl = baseUrl + "/parking/v1/camera";
-        Camera camera = cameraRepository.getOne()
-        return null;
+
+    private String baseUrl="http://localhost:8081/api/v1/test";
+
+    public ResponseEntity<String> getCamera() {
+        String reqUrl = baseUrl + "/camera";
+        return getResponse(reqUrl);
     }
 
-    public String getCameraImage() {
-        return null;
+    public ResponseEntity<String> getTest() {
+        String reqUrl = baseUrl + "/permit-all";
+        return getResponse(reqUrl);
     }
+
+    public ResponseEntity<String> getCameraImage() {
+        String reqUrl = baseUrl + "/image";
+        ResponseEntity<String> responseEntity = getResponse(reqUrl);
+        return responseEntity;
+    }
+
 }

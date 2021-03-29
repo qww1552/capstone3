@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.model;
+package kr.ac.jejunu.capstone.model.station.camera;
 
 import lombok.Data;
 
