@@ -7,7 +7,7 @@ import java.awt.*;
 
 @Data
 public class CameraResponse {
-    private boolean status;
+    private String status;
     private Camera camera;
     private Image image;
 }
