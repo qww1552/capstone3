@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class CommonResponse<T> {
-//    private Integer statusCode;
-    private String status;
+    // 클라이언트로 나가는 응답
+    private Integer statusCode;
+    private Boolean status;
     private T result;
 }

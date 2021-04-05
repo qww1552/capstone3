@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping(value = "/parking/v1/camera")
+@RequestMapping(value = "/cameras")
 public class CameraController {
     @Autowired
     private CameraRepository cameraRepository;
