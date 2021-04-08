@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping(value = "/parking/v1/camera")
@@ -16,10 +15,8 @@ public class CameraController {
 
     @GetMapping("/{cameraId}")
     public String getCamera(@PathVariable Integer cameraId) {
-        RestTemplate restTemplate = new RestTemplate();
-        String body = restTemplate.getForObject("http://localhost:8081/api/v1/test/permit-all", String.class);
-        System.out.println(body);
-        return body;
+
+        return null;
     }
 
     @GetMapping("/cameraId")
