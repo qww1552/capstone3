@@ -18,9 +18,6 @@ public class Space implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer spaceId;
-    @OneToOne
-    @JoinColumn(name = "cid")
-    private Camera camera;
 
     @OneToMany(targetEntity = Spot.class,cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Spot> spots;

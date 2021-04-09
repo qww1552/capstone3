@@ -49,10 +49,11 @@ public class ScheduledTask {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        List<Spot> spots = space.getSpots();
+//        List<Spot> spots = space.getSpots();
 //        spotRepository.saveAll(spots);
-        System.out.println(spots);
+//        System.out.println(spots);
 //        cameraRepository.save(camera);
+        System.out.println(camera);
         System.out.println(space);
 //        spaceRepository.save(space);
         log.info("The time is now {}",dateFormat.format(new Date()));
