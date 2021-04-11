@@ -3,17 +3,24 @@ package kr.ac.jejunu.capstone.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.ac.jejunu.capstone.client.utils.ClientUtils;
+import kr.ac.jejunu.capstone.model.dto.space.SpaceDto;
+import kr.ac.jejunu.capstone.model.dto.space.SpotDto;
 import kr.ac.jejunu.capstone.model.response.client.CameraResponse;
 import kr.ac.jejunu.capstone.model.response.client.SpaceResponse;
 import kr.ac.jejunu.capstone.model.response.client.SpotResponse;
-import kr.ac.jejunu.capstone.model.station.camera.Camera;
-import kr.ac.jejunu.capstone.model.station.space.Space;
-import kr.ac.jejunu.capstone.model.station.space.Spot;
+import kr.ac.jejunu.capstone.model.entity.camera.Camera;
+import kr.ac.jejunu.capstone.model.entity.space.Space;
+import kr.ac.jejunu.capstone.model.entity.space.Spot;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
 @Component
@@ -46,12 +53,23 @@ public class BoardClient {
     }
 
     // 카메라가 바라보는 영역
-    public Space getSpace() throws JsonProcessingException {
+    public SpaceDto getSpace() throws JsonProcessingException {
         String resUrl = baseUrl + "/spaces";
         ResponseEntity<String> responseEntity = ClientUtils.getResponse(resUrl);
+
         ObjectMapper objectMapper = new ObjectMapper();
-        SpaceResponse response = objectMapper.readValue(responseEntity.getBody(), SpaceResponse.class);
-        return response.getSpace();
+        JSONObject jsonObject = new JSONObject(responseEntity.getBody());
+        JSONArray spaceArray = jsonObject.getJSONArray("space");
+
+        SpaceDto spaceDto = new SpaceDto();
+        List<SpotDto> spots = new ArrayList<>();
+        for (Object space : spaceArray) {
+            SpotDto spotDto = objectMapper.readValue(space.toString(), SpotDto.class);
+            spots.add(spotDto);
+        }
+        spaceDto.setSpots(spots);
+
+        return spaceDto;
     }
 
     // 스페이스 추가 -수정필요

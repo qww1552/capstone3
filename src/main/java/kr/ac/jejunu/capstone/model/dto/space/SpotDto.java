@@ -1,17 +1,19 @@
-package kr.ac.jejunu.capstone.model.station.space;
+package kr.ac.jejunu.capstone.model.dto.space;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
-@SuppressWarnings("ALL")
 @Data
-@Entity(name = "spot")
-public class Spot {
+@AllArgsConstructor
+@RequiredArgsConstructor
+public class SpotDto {
+    // 응답으로 받을 클래스
     // 주차공간 1칸
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer sid;
     // 이차원 배열 표현해야함(좌표 4개)
     @ElementCollection

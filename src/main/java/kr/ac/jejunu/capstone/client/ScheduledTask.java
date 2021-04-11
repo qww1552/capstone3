@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.ac.jejunu.capstone.Repository.CameraRepository;
 import kr.ac.jejunu.capstone.Repository.SpaceRepository;
 import kr.ac.jejunu.capstone.Repository.SpotRepository;
-import kr.ac.jejunu.capstone.model.station.camera.Camera;
-import kr.ac.jejunu.capstone.model.station.space.Space;
-import kr.ac.jejunu.capstone.model.station.space.Spot;
+import kr.ac.jejunu.capstone.model.dto.space.SpaceDto;
+import kr.ac.jejunu.capstone.model.entity.camera.Camera;
+import kr.ac.jejunu.capstone.model.entity.space.Space;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 @Component
 public class ScheduledTask {
@@ -42,7 +41,7 @@ public class ScheduledTask {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Space space = null;
+        SpaceDto space = null;
 
         try {
             space = client.getSpace();

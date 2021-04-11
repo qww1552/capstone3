@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.model.station.camera;
+package kr.ac.jejunu.capstone.model.dto.camera;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,15 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Data
-@Entity(name = "camera")
 @NoArgsConstructor
-public class Camera {
-    @Id
-    @Column(name = "cid")
+public class CameraDto {
+    // 응답으로 받을 클래스
+
     private Integer cid;
     private Byte[] image;
 
-    public Camera(Integer cid) {
+    public CameraDto(Integer cid) {
         this.cid = cid;
     }
 }
