@@ -6,10 +6,8 @@ import kr.ac.jejunu.capstone.client.utils.ClientUtils;
 import kr.ac.jejunu.capstone.model.dto.space.SpaceDto;
 import kr.ac.jejunu.capstone.model.dto.space.SpotDto;
 import kr.ac.jejunu.capstone.model.response.client.CameraResponse;
-import kr.ac.jejunu.capstone.model.response.client.SpaceResponse;
 import kr.ac.jejunu.capstone.model.response.client.SpotResponse;
 import kr.ac.jejunu.capstone.model.entity.camera.Camera;
-import kr.ac.jejunu.capstone.model.entity.space.Space;
 import kr.ac.jejunu.capstone.model.entity.space.Spot;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
@@ -27,6 +24,7 @@ import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
 public class BoardClient {
 
     private String baseUrl = "http://localhost:8082/parking/v1";
+//    private String baseUrl = "http://125.178.149.31:21152/parking/v1";
 
     public String getBaseUrl() {
         return baseUrl.toString();
@@ -73,8 +71,24 @@ public class BoardClient {
     }
 
     // 스페이스 추가 -수정필요
-    public ResponseEntity<String> setSpace() {
-        return null;
+    public ResponseEntity<String> setSpace(Integer sid, SpaceDto spaceDto) {
+        String reqUrl = baseUrl + "/spaces/" + sid;
+        SpotDto spotDto = new SpotDto();
+        spotDto.setSid(sid);
+
+        ArrayList list = new ArrayList<double[]>();
+        list.add(new double[] {0.21253672869735563,-0.15404699738903394});
+        list.add(new double[] {0.28697355533790403,0.39164490861618795});
+        list.add(new double[] {0.7688540646425073,0.39947780678851186});
+        list.add(new double[] {0.5651322233104799,-0.13315926892950392});
+
+        spotDto.setSpot(list);
+        SpaceDto spaceDtoTest = new SpaceDto();
+        List spots = new ArrayList<SpotDto>();
+        spots.add(spotDto);
+        spaceDtoTest.setSpots(spots);
+        ResponseEntity<String> responseEntity = ClientUtils.postResponseForSpace(reqUrl, spaceDtoTest);
+        return responseEntity;
     }
 
     // 주자공간 하나 받아오기

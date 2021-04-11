@@ -6,6 +6,7 @@ import kr.ac.jejunu.capstone.model.entity.camera.Camera;
 import kr.ac.jejunu.capstone.model.entity.space.Space;
 import kr.ac.jejunu.capstone.model.entity.space.Spot;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 
@@ -29,6 +30,13 @@ public class ClientTest {
         BoardClient client = new BoardClient();
         Spot spot = client.getSpot(430787);
         System.out.println(spot);
+    }
+
+//    @Test
+    public void setSpaceTest() {
+        BoardClient client = new BoardClient();
+        ResponseEntity<String> responseEntity = client.setSpace(430788,null);
+        System.out.println(responseEntity.getBody());
     }
 
 }
