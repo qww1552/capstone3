@@ -28,14 +28,14 @@ public class ClientTest {
     @Test
     public void spotTest() throws JsonProcessingException {
         BoardClient client = new BoardClient();
-        Spot spot = client.getSpot(430787);
+        Spot spot = client.getSpot(430781);
         System.out.println(spot);
     }
 
-//    @Test
-    public void setSpaceTest() {
+    @Test
+    public void setSpaceTest() throws JsonProcessingException {
         BoardClient client = new BoardClient();
-        ResponseEntity<String> responseEntity = client.setSpace(430788,null);
+        ResponseEntity<String> responseEntity = client.setSpace(430783);
         System.out.println(responseEntity.getBody());
     }
 

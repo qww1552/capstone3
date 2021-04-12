@@ -23,8 +23,8 @@ import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
 @Component
 public class BoardClient {
 
-    private String baseUrl = "http://localhost:8082/parking/v1";
-//    private String baseUrl = "http://125.178.149.31:21152/parking/v1";
+//    private String baseUrl = "http://localhost:8082/parking/v1";
+    private String baseUrl = "http://125.178.149.31:21152/parking/v1";
 
     public String getBaseUrl() {
         return baseUrl.toString();
@@ -71,7 +71,7 @@ public class BoardClient {
     }
 
     // 스페이스 추가 -수정필요
-    public ResponseEntity<String> setSpace(Integer sid, SpaceDto spaceDto) {
+    public ResponseEntity<String> setSpace(Integer sid) throws JsonProcessingException {
         String reqUrl = baseUrl + "/spaces/" + sid;
         SpotDto spotDto = new SpotDto();
         spotDto.setSid(sid);
@@ -83,11 +83,12 @@ public class BoardClient {
         list.add(new double[] {0.5651322233104799,-0.13315926892950392});
 
         spotDto.setSpot(list);
-        SpaceDto spaceDtoTest = new SpaceDto();
+
         List spots = new ArrayList<SpotDto>();
         spots.add(spotDto);
-        spaceDtoTest.setSpots(spots);
-        ResponseEntity<String> responseEntity = ClientUtils.postResponseForSpace(reqUrl, spaceDtoTest);
+
+        ResponseEntity<String> responseEntity =
+                ClientUtils.postResponseForSpace(reqUrl,"space", spotDto);
         return responseEntity;
     }
 

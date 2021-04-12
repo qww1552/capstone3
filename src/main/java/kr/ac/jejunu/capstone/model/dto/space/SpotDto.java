@@ -19,5 +19,5 @@ public class SpotDto {
     @ElementCollection
     private List<double[]> spot;
 
-    private Boolean full;
+//    private Boolean full;
 }
