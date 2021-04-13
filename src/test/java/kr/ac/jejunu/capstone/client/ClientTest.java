@@ -2,13 +2,13 @@ package kr.ac.jejunu.capstone.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.ac.jejunu.capstone.model.dto.space.SpaceDto;
-import kr.ac.jejunu.capstone.model.entity.camera.Camera;
-import kr.ac.jejunu.capstone.model.entity.space.Space;
-import kr.ac.jejunu.capstone.model.entity.space.Spot;
+import kr.ac.jejunu.capstone.model.entity.Camera;
+import kr.ac.jejunu.capstone.model.entity.Spot;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ClientTest {
     @Test
@@ -21,7 +21,7 @@ public class ClientTest {
     @Test
     public void spaceTest() throws JsonProcessingException {
         BoardClient client = new BoardClient();
-        SpaceDto space = client.getSpace();
+        List<Spot> space = client.getSpace();
         System.out.println("space : "+space);
     }
 

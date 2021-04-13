@@ -3,15 +3,13 @@ package kr.ac.jejunu.capstone.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.ac.jejunu.capstone.client.utils.ClientUtils;
-import kr.ac.jejunu.capstone.model.dto.space.SpaceDto;
 import kr.ac.jejunu.capstone.model.dto.space.SpotDto;
 import kr.ac.jejunu.capstone.model.response.client.CameraResponse;
+import kr.ac.jejunu.capstone.model.response.client.SpaceResponse;
 import kr.ac.jejunu.capstone.model.response.client.SpotResponse;
-import kr.ac.jejunu.capstone.model.entity.camera.Camera;
-import kr.ac.jejunu.capstone.model.entity.space.Spot;
+import kr.ac.jejunu.capstone.model.entity.Camera;
+import kr.ac.jejunu.capstone.model.entity.Spot;
 import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +21,8 @@ import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
 @Component
 public class BoardClient {
 
-//    private String baseUrl = "http://localhost:8082/parking/v1";
-    private String baseUrl = "http://125.178.149.31:21152/parking/v1";
+    private String baseUrl = "http://localhost:8082/parking/v1";
+//    private String baseUrl = "http://125.178.149.31:21152/parking/v1";
 
     public String getBaseUrl() {
         return baseUrl.toString();
@@ -51,24 +49,16 @@ public class BoardClient {
     }
 
     // 카메라가 바라보는 영역
-    public SpaceDto getSpace() throws JsonProcessingException {
+    public List<Spot> getSpace() throws JsonProcessingException {
         String resUrl = baseUrl + "/spaces";
         ResponseEntity<String> responseEntity = ClientUtils.getResponse(resUrl);
 
+        String body = responseEntity.getBody();
         ObjectMapper objectMapper = new ObjectMapper();
-        JSONObject jsonObject = new JSONObject(responseEntity.getBody());
-        JSONArray spaceArray = jsonObject.getJSONArray("space");
-
-        SpaceDto spaceDto = new SpaceDto();
-        List<SpotDto> spots = new ArrayList<>();
-        for (Object space : spaceArray) {
-            SpotDto spotDto = objectMapper.readValue(space.toString(), SpotDto.class);
-            spots.add(spotDto);
-        }
-        spaceDto.setSpots(spots);
-
-        return spaceDto;
+        SpaceResponse spaceResponse = objectMapper.readValue(body, SpaceResponse.class);
+        return spaceResponse.getSpace();
     }
+
 
     // 스페이스 추가 -수정필요
     public ResponseEntity<String> setSpace(Integer sid) throws JsonProcessingException {

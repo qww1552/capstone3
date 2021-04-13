@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.model.entity.camera;
+package kr.ac.jejunu.capstone.model.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

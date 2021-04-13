@@ -1,5 +1,6 @@
 package kr.ac.jejunu.capstone.model.entity.space;
 
+import kr.ac.jejunu.capstone.model.entity.Spot;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

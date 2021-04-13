@@ -31,17 +31,19 @@ public class ClientUtils {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<>();
+        HttpEntity<String> request;
+        ResponseEntity<String> responseEntity;
         headers.setContentType(
                 new MediaType("application","json", Charset.forName("UTF-8"))
         );
-        Map<String, Object> map = new HashMap<>();
+
         map.put(attributeName,object);
         String json = mapper.writeValueAsString(map);
-        System.out.println(json);
-        HttpEntity<String> request = new HttpEntity<>(json,headers);
 
-        ResponseEntity<String> responseEntity =
-                restTemplate.exchange(reqUrl, HttpMethod.POST, request, String.class);
+        request = new HttpEntity<>(json,headers);
+
+        responseEntity = restTemplate.exchange(reqUrl, HttpMethod.POST, request, String.class);
         return responseEntity;
     }
 }

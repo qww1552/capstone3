@@ -5,8 +5,7 @@ import kr.ac.jejunu.capstone.Repository.CameraRepository;
 import kr.ac.jejunu.capstone.Repository.SpaceRepository;
 import kr.ac.jejunu.capstone.Repository.SpotRepository;
 import kr.ac.jejunu.capstone.model.dto.space.SpaceDto;
-import kr.ac.jejunu.capstone.model.entity.camera.Camera;
-import kr.ac.jejunu.capstone.model.entity.space.Space;
+import kr.ac.jejunu.capstone.model.entity.Camera;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,19 +40,11 @@ public class ScheduledTask {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        SpaceDto space = null;
-
-        try {
-            space = client.getSpace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
 //        List<Spot> spots = space.getSpots();
 //        spotRepository.saveAll(spots);
 //        System.out.println(spots);
 //        cameraRepository.save(camera);
         System.out.println(camera);
-        System.out.println(space);
 //        spaceRepository.save(space);
         log.info("The time is now {}",dateFormat.format(new Date()));
     }

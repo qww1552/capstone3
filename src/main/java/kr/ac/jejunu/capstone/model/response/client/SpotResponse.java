@@ -1,6 +1,6 @@
 package kr.ac.jejunu.capstone.model.response.client;
 
-import kr.ac.jejunu.capstone.model.entity.space.Spot;
+import kr.ac.jejunu.capstone.model.entity.Spot;
 import lombok.Data;
 
 import java.util.List;

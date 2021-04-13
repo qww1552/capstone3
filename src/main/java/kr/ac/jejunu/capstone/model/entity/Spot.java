@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.model.entity.space;
+package kr.ac.jejunu.capstone.model.entity;
 
 import lombok.Data;
 
