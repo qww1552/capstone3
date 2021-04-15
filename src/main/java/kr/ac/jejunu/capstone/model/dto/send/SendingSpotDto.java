@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.model.dto;
+package kr.ac.jejunu.capstone.model.dto.send;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

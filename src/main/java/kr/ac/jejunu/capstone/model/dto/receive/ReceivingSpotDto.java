@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.model.dto;
+package kr.ac.jejunu.capstone.model.dto.receive;
 
 import lombok.Data;
 import java.util.List;

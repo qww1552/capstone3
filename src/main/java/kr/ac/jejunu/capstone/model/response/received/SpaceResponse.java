@@ -1,7 +1,6 @@
 package kr.ac.jejunu.capstone.model.response.received;
 
-import kr.ac.jejunu.capstone.model.dto.ReceivingSpotDto;
-import kr.ac.jejunu.capstone.model.entity.Spot;
+import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpotDto;
 import lombok.*;
 
 import java.util.List;

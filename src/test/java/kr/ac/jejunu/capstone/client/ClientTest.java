@@ -1,7 +1,7 @@
 package kr.ac.jejunu.capstone.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import kr.ac.jejunu.capstone.model.dto.ReceivingSpotDto;
+import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpotDto;
 import kr.ac.jejunu.capstone.model.entity.Camera;
 import kr.ac.jejunu.capstone.model.entity.Spot;
 import org.junit.jupiter.api.Test;

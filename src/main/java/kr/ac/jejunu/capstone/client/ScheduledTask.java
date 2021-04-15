@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.ac.jejunu.capstone.Repository.CameraRepository;
 import kr.ac.jejunu.capstone.Repository.SpotRepository;
 import kr.ac.jejunu.capstone.Repository.StationRepository;
-import kr.ac.jejunu.capstone.model.dto.ReceivingSpotDto;
+import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpotDto;
 import kr.ac.jejunu.capstone.model.entity.Camera;
 import kr.ac.jejunu.capstone.model.entity.Spot;
 import kr.ac.jejunu.capstone.model.entity.Station;
