@@ -1,6 +1,6 @@
-package kr.ac.jejunu.capstone.model.response.client;
+package kr.ac.jejunu.capstone.model.response.received;
 
-import kr.ac.jejunu.capstone.model.entity.camera.Camera;
+import kr.ac.jejunu.capstone.model.entity.Camera;
 import lombok.Data;
 
 import java.awt.*;

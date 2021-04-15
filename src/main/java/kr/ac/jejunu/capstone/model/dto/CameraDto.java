@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.model.dto.camera;
+package kr.ac.jejunu.capstone.model.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

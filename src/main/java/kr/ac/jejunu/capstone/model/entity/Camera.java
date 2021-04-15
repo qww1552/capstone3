@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.model.entity.camera;
+package kr.ac.jejunu.capstone.model.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ public class Camera {
     @Id
     @Column(name = "cid")
     private Integer cid;
-    private Byte[] image;
+    private byte[] image;
 
     public Camera(Integer cid) {
         this.cid = cid;
