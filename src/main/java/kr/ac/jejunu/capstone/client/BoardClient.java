@@ -3,10 +3,11 @@ package kr.ac.jejunu.capstone.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.ac.jejunu.capstone.client.utils.ClientUtils;
-import kr.ac.jejunu.capstone.model.dto.space.SpotDto;
-import kr.ac.jejunu.capstone.model.response.client.CameraResponse;
-import kr.ac.jejunu.capstone.model.response.client.SpaceResponse;
-import kr.ac.jejunu.capstone.model.response.client.SpotResponse;
+import kr.ac.jejunu.capstone.model.dto.ReceivingSpotDto;
+import kr.ac.jejunu.capstone.model.dto.SendingSpotDto;
+import kr.ac.jejunu.capstone.model.response.received.CameraResponse;
+import kr.ac.jejunu.capstone.model.response.received.SpaceResponse;
+import kr.ac.jejunu.capstone.model.response.received.SpotResponse;
 import kr.ac.jejunu.capstone.model.entity.Camera;
 import kr.ac.jejunu.capstone.model.entity.Spot;
 import org.apache.commons.io.IOUtils;
@@ -21,6 +22,7 @@ import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
 @Component
 public class BoardClient {
 
+//    private String baseUrl;
     private String baseUrl = "http://localhost:8082/parking/v1";
 //    private String baseUrl = "http://125.178.149.31:21152/parking/v1";
 
@@ -49,7 +51,7 @@ public class BoardClient {
     }
 
     // 카메라가 바라보는 영역
-    public List<Spot> getSpace() throws JsonProcessingException {
+    public List<ReceivingSpotDto> getSpace() throws JsonProcessingException {
         String resUrl = baseUrl + "/spaces";
         ResponseEntity<String> responseEntity = ClientUtils.getResponse(resUrl);
 
@@ -63,8 +65,8 @@ public class BoardClient {
     // 스페이스 추가 -수정필요
     public ResponseEntity<String> setSpace(Integer sid) throws JsonProcessingException {
         String reqUrl = baseUrl + "/spaces/" + sid;
-        SpotDto spotDto = new SpotDto();
-        spotDto.setSid(sid);
+        SendingSpotDto sendingSpotDto = new SendingSpotDto();
+        sendingSpotDto.setSid(sid);
 
         ArrayList list = new ArrayList<double[]>();
         list.add(new double[] {0.21253672869735563,-0.15404699738903394});
@@ -72,17 +74,17 @@ public class BoardClient {
         list.add(new double[] {0.7688540646425073,0.39947780678851186});
         list.add(new double[] {0.5651322233104799,-0.13315926892950392});
 
-        spotDto.setSpot(list);
+        sendingSpotDto.setSpot(list);
 
-        List spots = new ArrayList<SpotDto>();
-        spots.add(spotDto);
+        List spots = new ArrayList<SendingSpotDto>();
+        spots.add(sendingSpotDto);
 
         ResponseEntity<String> responseEntity =
-                ClientUtils.postResponseForSpace(reqUrl,"space", spotDto);
+                ClientUtils.postResponseForSpace(reqUrl,"space", sendingSpotDto);
         return responseEntity;
     }
 
-    // 주자공간 하나 받아오기
+    // 주차공간 하나 받아오기
     public Spot getSpot(Integer sid) throws JsonProcessingException {
         String resUrl = baseUrl + "/spaces/" + sid;
         ResponseEntity<String> responseEntity = ClientUtils.getResponse(resUrl);

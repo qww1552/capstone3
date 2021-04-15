@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.model.dto.space;
+package kr.ac.jejunu.capstone.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class SpotDto {
+public class SendingSpotDto {
     // 응답으로 받을 클래스
     // 주차공간 1칸
 
