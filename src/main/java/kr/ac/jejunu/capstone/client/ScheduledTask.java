@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,8 +28,6 @@ public class ScheduledTask {
 
     @Autowired
     private CameraRepository cameraRepository;
-//    @Autowired
-//    private SpaceRepository spaceRepository;
     @Autowired
     private SpotRepository spotRepository;
     @Autowired

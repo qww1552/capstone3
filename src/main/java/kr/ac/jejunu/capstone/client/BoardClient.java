@@ -13,7 +13,6 @@ import kr.ac.jejunu.capstone.model.entity.Spot;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,6 @@ import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
 @Component
 public class BoardClient {
 
-//    private String baseUrl;
     private String baseUrl = "http://localhost:8082/parking/v1";
 //    private String baseUrl = "http://125.178.149.31:21152/parking/v1";
 
@@ -43,24 +41,26 @@ public class BoardClient {
         return response.getCamera();
     }
 
-    // 이미지를 바이트배열로 반환
-    public byte[] getCameraImage() throws IOException {
-        String reqUrl = baseUrl + "/image";
-        ResponseEntity<String> responseEntity = getResponse(reqUrl);
-        return IOUtils.toByteArray(String.valueOf(responseEntity));
-    }
-
     // 카메라가 바라보는 영역
+
     public List<ReceivingSpotDto> getSpace() throws JsonProcessingException {
         String resUrl = baseUrl + "/spaces";
-        ResponseEntity<String> responseEntity = ClientUtils.getResponse(resUrl);
 
-        String body = responseEntity.getBody();
+        ResponseEntity<String> responseEntity = ClientUtils.getResponse(resUrl);
         ObjectMapper objectMapper = new ObjectMapper();
-        SpaceResponse spaceResponse = objectMapper.readValue(body, SpaceResponse.class);
+        SpaceResponse spaceResponse = objectMapper.readValue(responseEntity.getBody(), SpaceResponse.class);
         return spaceResponse.getSpace();
     }
 
+    // 주차공간 하나 받아오기
+    public Spot getSpot(Integer sid) throws JsonProcessingException {
+        String resUrl = baseUrl + "/spaces/" + sid;
+
+        ResponseEntity<String> responseEntity = ClientUtils.getResponse(resUrl);
+        ObjectMapper objectMapper = new ObjectMapper();
+        SpotResponse response = objectMapper.readValue(responseEntity.getBody(), SpotResponse.class);
+        return response.getSpot();
+    }
 
     // 스페이스 추가 -수정필요
     public ResponseEntity<String> setSpace(Integer sid) throws JsonProcessingException {
@@ -84,12 +84,10 @@ public class BoardClient {
         return responseEntity;
     }
 
-    // 주차공간 하나 받아오기
-    public Spot getSpot(Integer sid) throws JsonProcessingException {
-        String resUrl = baseUrl + "/spaces/" + sid;
-        ResponseEntity<String> responseEntity = ClientUtils.getResponse(resUrl);
-        ObjectMapper objectMapper = new ObjectMapper();
-        SpotResponse response = objectMapper.readValue(responseEntity.getBody(), SpotResponse.class);
-        return response.getSpot();
+    // 이미지를 바이트배열로 반환
+    public byte[] getCameraImage() throws IOException {
+        String reqUrl = baseUrl + "/image";
+        ResponseEntity<String> responseEntity = getResponse(reqUrl);
+        return IOUtils.toByteArray(String.valueOf(responseEntity));
     }
 }

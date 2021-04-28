@@ -36,15 +36,15 @@ public class StationService {
 
     public List<ReceivingSpotDto> getSpotsInStation(Integer stationId) {
         List<Spot> spots = spotRepository.findAllByStationId(stationId);
-        List<ReceivingSpotDto> resultList = new ArrayList<>();
+        List<ReceivingSpotDto> spotDtoList = new ArrayList<>();
         for (Spot spot: spots) {
             ReceivingSpotDto spotDto = new ReceivingSpotDto();
             spotDto.setSid(spot.getSid());
             spotDto.setSpot(spot.getSpot());
             spotDto.setFull(spot.getFull());
 
-            resultList.add(spotDto);
+            spotDtoList.add(spotDto);
         }
-        return resultList;
+        return spotDtoList;
     }
 }
