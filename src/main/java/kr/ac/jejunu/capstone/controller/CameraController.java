@@ -23,7 +23,6 @@ public class CameraController {
     }
 
     @GetMapping("/test")
-    @ResponseBody
     public String test() {
         return "test";
     }

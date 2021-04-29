@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
-
 // rest 말고 페이지 만들어서 리턴
 @RestController
 @RequestMapping(value = "/admin")
