@@ -1,6 +1,6 @@
 package kr.ac.jejunu.capstone.client;
 
-import kr.ac.jejunu.capstone.Repository.SpotRepository;
+import kr.ac.jejunu.capstone.repository.SpotRepository;
 import kr.ac.jejunu.capstone.model.entity.Spot;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

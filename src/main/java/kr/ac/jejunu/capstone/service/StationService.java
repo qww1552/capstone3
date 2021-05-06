@@ -1,7 +1,7 @@
 package kr.ac.jejunu.capstone.service;
 
-import kr.ac.jejunu.capstone.Repository.SpotRepository;
-import kr.ac.jejunu.capstone.Repository.StationRepository;
+import kr.ac.jejunu.capstone.repository.SpotRepository;
+import kr.ac.jejunu.capstone.repository.StationRepository;
 import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpotDto;
 import kr.ac.jejunu.capstone.model.dto.send.StationDto;
 import kr.ac.jejunu.capstone.model.entity.Spot;

@@ -1,9 +1,9 @@
 package kr.ac.jejunu.capstone.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import kr.ac.jejunu.capstone.Repository.CameraRepository;
-import kr.ac.jejunu.capstone.Repository.SpotRepository;
-import kr.ac.jejunu.capstone.Repository.StationRepository;
+import kr.ac.jejunu.capstone.repository.CameraRepository;
+import kr.ac.jejunu.capstone.repository.SpotRepository;
+import kr.ac.jejunu.capstone.repository.StationRepository;
 import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpotDto;
 import kr.ac.jejunu.capstone.model.entity.Camera;
 import kr.ac.jejunu.capstone.model.entity.Spot;
@@ -11,7 +11,6 @@ import kr.ac.jejunu.capstone.model.entity.Station;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -34,7 +33,7 @@ public class ScheduledTask {
     private StationRepository stationRepository;
 
 
-    @Scheduled(fixedRate = 5000)
+//    @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
         List<Station> stations = stationRepository.findAll();
         for (Station station: stations) {

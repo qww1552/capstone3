@@ -1,6 +1,6 @@
 package kr.ac.jejunu.capstone.controller;
 
-import kr.ac.jejunu.capstone.Repository.CameraRepository;
+import kr.ac.jejunu.capstone.repository.CameraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

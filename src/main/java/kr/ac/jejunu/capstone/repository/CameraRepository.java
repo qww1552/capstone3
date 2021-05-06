@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.Repository;
+package kr.ac.jejunu.capstone.repository;
 
 import kr.ac.jejunu.capstone.model.entity.Camera;
 import org.springframework.data.jpa.repository.JpaRepository;

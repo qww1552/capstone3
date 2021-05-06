@@ -1,6 +1,6 @@
 package kr.ac.jejunu.capstone.controller;
 
-import kr.ac.jejunu.capstone.Repository.StationRepository;
+import kr.ac.jejunu.capstone.repository.StationRepository;
 import kr.ac.jejunu.capstone.model.entity.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
