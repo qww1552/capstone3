@@ -14,7 +14,7 @@ public class Camera {
     @Id
     @Column(name = "cid")
     private Integer cid;
-    private Byte[] image;
+    private byte[] image;
 
     public Camera(Integer cid) {
         this.cid = cid;
