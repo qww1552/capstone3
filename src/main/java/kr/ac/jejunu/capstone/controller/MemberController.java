@@ -3,7 +3,7 @@ package kr.ac.jejunu.capstone.controller;
 import kr.ac.jejunu.capstone.configuration.security.JwtTokenProvider;
 import kr.ac.jejunu.capstone.configuration.security.user.Member;
 import kr.ac.jejunu.capstone.configuration.security.user.MemberRepository;
-import kr.ac.jejunu.capstone.model.response.exception.UserNotExistException;
+import kr.ac.jejunu.capstone.exception.UserNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
