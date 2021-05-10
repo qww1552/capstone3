@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.model.response;
+package kr.ac.jejunu.capstone.exception;
 
 import lombok.*;
 import java.time.ZonedDateTime;

@@ -3,6 +3,7 @@ package kr.ac.jejunu.capstone.controller;
 import kr.ac.jejunu.capstone.configuration.security.JwtTokenProvider;
 import kr.ac.jejunu.capstone.configuration.security.user.Member;
 import kr.ac.jejunu.capstone.configuration.security.user.MemberRepository;
+import kr.ac.jejunu.capstone.exception.UserDuplicatedException;
 import kr.ac.jejunu.capstone.exception.UserNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,9 @@ public class MemberController {
 
     @PostMapping("/join")
     public Long join(@RequestBody Map<String, String> member) {
+        if (memberRepository.findByEmail(member.get("email")).isPresent()) {
+            throw new UserDuplicatedException("이미 가입된 회원입니다.");
+        }
         return memberRepository.save(
                 Member.builder()
                 .email(member.get("email"))
