@@ -20,13 +20,6 @@ public class ClientUtils {
         return responseEntity;
     }
 
-    private static void setHeaders() {
-        restTemplate = new RestTemplate();
-        headers = new HttpHeaders();
-        headers.setContentType(new MediaType("application", "json",
-                Charset.forName("UTF-8")));
-    }
-
     public static ResponseEntity<String> postResponseForSpace(String reqUrl,
                                                               String attributeName,
                                                               Object object) throws JsonProcessingException {
@@ -43,5 +36,12 @@ public class ClientUtils {
 
         responseEntity = restTemplate.exchange(reqUrl, HttpMethod.POST, request, String.class);
         return responseEntity;
+    }
+
+    private static void setHeaders() {
+        restTemplate = new RestTemplate();
+        headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json",
+                Charset.forName("UTF-8")));
     }
 }

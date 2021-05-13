@@ -3,7 +3,6 @@ package kr.ac.jejunu.capstone.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.ac.jejunu.capstone.client.BoardClient;
 import kr.ac.jejunu.capstone.model.dto.send.SendingSpotDto;
-import kr.ac.jejunu.capstone.model.entity.Spot;
 import kr.ac.jejunu.capstone.repository.StationRepository;
 import kr.ac.jejunu.capstone.model.entity.Station;
 import lombok.RequiredArgsConstructor;
@@ -60,9 +59,12 @@ public class AdminPageController {
 
     // 좌표값 세팅
     @PostMapping("/{stationId}/{sid}")
-    public ResponseEntity<String> setSid(@PathVariable Integer stationId, @PathVariable Integer sid, SendingSpotDto sendingSpotDto) {
+    public ResponseEntity<String> setSid(@PathVariable Integer stationId,
+                                         @PathVariable Integer sid,
+                                         @RequestBody Map<String,SendingSpotDto> spaceDto) {
         ResponseEntity<String> responseEntity = null;
-        System.out.println(sendingSpotDto);
+        SendingSpotDto sendingSpotDto = spaceDto.get("space");
+        System.out.println(spaceDto);
         Station station = stationRepository.findById(stationId).get();
         boardClient.setBaseUrl(station.getBoardAddress());
         try {
