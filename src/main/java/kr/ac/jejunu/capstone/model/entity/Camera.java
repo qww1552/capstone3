@@ -14,7 +14,7 @@ public class Camera {
     @Id
     @Column(name = "cid")
     private Integer cid;
-    private byte[] image;
+    private String imageUri;
 
     public Camera(Integer cid) {
         this.cid = cid;

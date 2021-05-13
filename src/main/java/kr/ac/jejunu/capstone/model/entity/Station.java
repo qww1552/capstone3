@@ -22,5 +22,5 @@ public class Station {
     private Integer width;
     private Integer height;
 
-    private String url;
+    private String boardAddress; //보드 주소
 }

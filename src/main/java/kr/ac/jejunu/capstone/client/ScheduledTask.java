@@ -11,6 +11,7 @@ import kr.ac.jejunu.capstone.model.entity.Station;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -33,16 +34,24 @@ public class ScheduledTask {
     private StationRepository stationRepository;
 
 
-//    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
+        Camera camera = null;
+        try {
+            camera = client.getCamera();
+            camera.setImageUri(client.getCameraImageUri(camera.getCid())); // 이미지는 아직 구현 안함
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        cameraRepository.save(camera);
         List<Station> stations = stationRepository.findAll();
         for (Station station: stations) {
 
-            client.setBaseUrl(station.getUrl());
-            Camera camera = null;
+            client.setBaseUrl(station.getBoardAddress());
+//            Camera camera = null;
             try {
                 camera = client.getCamera();
-//            camera.setImage(client.getCameraImage()); // 이미지는 아직 구현 안함
+                camera.setImageUri(client.getCameraImageUri(camera.getCid()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
