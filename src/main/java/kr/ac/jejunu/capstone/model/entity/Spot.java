@@ -1,11 +1,14 @@
 package kr.ac.jejunu.capstone.model.entity;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @SuppressWarnings("ALL")
+@RequiredArgsConstructor
 @Data
 @Entity(name = "spot")
 public class Spot {

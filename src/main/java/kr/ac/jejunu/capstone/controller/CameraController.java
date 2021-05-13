@@ -30,8 +30,4 @@ public class CameraController {
         return bytes;
     }
 
-    @GetMapping(value = "/test")
-    public String test() {
-        return "test";
-    }
 }

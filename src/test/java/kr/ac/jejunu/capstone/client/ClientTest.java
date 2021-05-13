@@ -35,8 +35,8 @@ public class ClientTest {
     @Test
     public void setSpaceTest() throws JsonProcessingException {
         BoardClient client = new BoardClient();
-        ResponseEntity<String> responseEntity = client.setSpace(430783);
-        System.out.println(responseEntity.getBody());
+//        ResponseEntity<String> responseEntity = client.setSpace(430783);
+//        System.out.println(responseEntity.getBody());
     }
 
 }

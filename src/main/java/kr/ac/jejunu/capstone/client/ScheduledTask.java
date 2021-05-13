@@ -36,19 +36,19 @@ public class ScheduledTask {
 
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
-        Camera camera = null;
-        try {
-            camera = client.getCamera();
-            camera.setImageUri(client.getCameraImageUri(camera.getCid())); // 이미지는 아직 구현 안함
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        cameraRepository.save(camera);
+//        Camera camera = null;
+//        try {
+//            camera = client.getCamera();
+//            camera.setImageUri(client.getCameraImageUri(camera.getCid())); // 이미지는 아직 구현 안함
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        cameraRepository.save(camera);
         List<Station> stations = stationRepository.findAll();
         for (Station station: stations) {
 
             client.setBaseUrl(station.getBoardAddress());
-//            Camera camera = null;
+            Camera camera = null;
             try {
                 camera = client.getCamera();
                 camera.setImageUri(client.getCameraImageUri(camera.getCid()));
