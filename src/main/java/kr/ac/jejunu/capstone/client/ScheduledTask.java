@@ -46,6 +46,7 @@ public class ScheduledTask {
 //        cameraRepository.save(camera);
         List<Station> stations = stationRepository.findAll();
         for (Station station: stations) {
+            System.out.println(station);
 
             client.setBaseUrl(station.getBoardAddress());
             Camera camera = null;
@@ -58,6 +59,7 @@ public class ScheduledTask {
             List<ReceivingSpotDto> receivedSpots = null;
             try {
                 receivedSpots = client.getSpace();
+                System.out.println(receivedSpots);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }

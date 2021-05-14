@@ -2,7 +2,9 @@ package kr.ac.jejunu.capstone.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.ac.jejunu.capstone.client.BoardClient;
+import kr.ac.jejunu.capstone.exception.StationNotFoundException;
 import kr.ac.jejunu.capstone.model.dto.send.SendingSpotDto;
+import kr.ac.jejunu.capstone.model.response.ApiResponse;
 import kr.ac.jejunu.capstone.repository.StationRepository;
 import kr.ac.jejunu.capstone.model.entity.Station;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,14 +26,17 @@ public class AdminPageController {
 
     // findAll
     @GetMapping("/")
-    public List<Station> getAllStations() {
-        return stationRepository.findAll();
+    public ResponseEntity getAllStations() {
+        List<Station> stations = stationRepository.findAll();
+        return ApiResponse.getResponseEntity(stations);
     }
 
     // findOne
     @GetMapping("/{stationId}")
-    public Optional<Station> getStation(@PathVariable Integer stationId) {
-        return stationRepository.findById(stationId);
+    public ResponseEntity getStation(@PathVariable Integer stationId) {
+        Station station = stationRepository.findById(stationId).orElseThrow(()->
+                new StationNotFoundException("주차장이 존재하지 않습니다."));
+        return ApiResponse.getResponseEntity(station);
     }
 
     // create
@@ -64,7 +68,6 @@ public class AdminPageController {
                                          @RequestBody Map<String,SendingSpotDto> spaceDto) {
         ResponseEntity<String> responseEntity = null;
         SendingSpotDto sendingSpotDto = spaceDto.get("space");
-        System.out.println(spaceDto);
         Station station = stationRepository.findById(stationId).get();
         boardClient.setBaseUrl(station.getBoardAddress());
         try {
@@ -72,6 +75,6 @@ public class AdminPageController {
         } catch (JsonProcessingException e) {                           // 나중에 순회하면서 db에 저장
             e.printStackTrace();
         }
-        return responseEntity;
+        return ApiResponse.getResponseEntity(sendingSpotDto);
     }
 }

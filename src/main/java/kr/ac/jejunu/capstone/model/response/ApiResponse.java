@@ -17,12 +17,17 @@ public class ApiResponse<T> {
     private T data;
 
     public static ResponseEntity getResponseEntity(Object object) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        HttpHeaders headers = getHttpHeaders();
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setStatus(200);
         apiResponse.setMessage("success");
         apiResponse.setData(object);
         return new ResponseEntity(apiResponse, headers, HttpStatus.OK);
+    }
+
+    private static HttpHeaders getHttpHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        return headers;
     }
 }

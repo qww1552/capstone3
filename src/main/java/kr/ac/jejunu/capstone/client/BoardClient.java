@@ -25,8 +25,8 @@ import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
 @Component
 public class BoardClient {
 
-    private String baseUrl = "http://localhost:8082/parking/v1";
-//    private String baseUrl = "http://125.178.149.31:21152/parking/v1";
+//    private String baseUrl = "http://localhost:8082/parking/v1";
+    private String baseUrl = "http://125.178.149.31:21152/parking/v1";
 
     public String getBaseUrl() {
         return baseUrl.toString();
