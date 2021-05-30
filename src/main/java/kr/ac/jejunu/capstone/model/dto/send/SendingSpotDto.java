@@ -11,7 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class SendingSpotDto {
-    // 응답으로 받을 클래스
     // 주차공간 1칸
 
     private Integer sid;

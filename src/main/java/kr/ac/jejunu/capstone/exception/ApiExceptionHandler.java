@@ -10,7 +10,9 @@ import java.time.ZonedDateTime;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
-    @ExceptionHandler(value = {UserNotExistException.class, CameraNotFoundException.class,
+    @ExceptionHandler(value = {
+            UserNotExistException.class,
+            CameraNotFoundException.class,
             StationNotFoundException.class})
     public ResponseEntity handleNotExistException(Exception e) {
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;

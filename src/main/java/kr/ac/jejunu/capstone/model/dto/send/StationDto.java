@@ -9,10 +9,13 @@ import javax.persistence.Id;
 
 @Data
 public class StationDto {
-    // 응답으로 받을 클래스
 
     private Integer id;
+    private String thumbnail;
     private String name;
+    private String locationDesc;
     private Double latitude;
     private Double longitude;
+    private Integer overallSpaces;
+    private Integer vacancy;
 }

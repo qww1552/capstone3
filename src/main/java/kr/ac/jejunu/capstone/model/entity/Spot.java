@@ -24,6 +24,5 @@ public class Spot {
     @OneToOne
     private Camera camera;
 
-
     private Boolean full;
 }

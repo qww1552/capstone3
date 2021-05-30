@@ -6,13 +6,12 @@ import kr.ac.jejunu.capstone.model.response.ApiResponse;
 import kr.ac.jejunu.capstone.service.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
+@CrossOrigin(value = "*",methods = {RequestMethod.GET,RequestMethod.POST})
 @RequestMapping("/stations")
 public class StationController {
     @Autowired

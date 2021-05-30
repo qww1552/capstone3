@@ -11,8 +11,5 @@ import java.util.List;
 
 @Configuration
 public class ParkingConfig {
-    @Bean
-    public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
-        return new ByteArrayHttpMessageConverter();
-    }
+
 }

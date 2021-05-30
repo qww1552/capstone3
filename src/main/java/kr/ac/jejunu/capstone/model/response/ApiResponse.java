@@ -12,14 +12,14 @@ import java.nio.charset.Charset;
 @Setter
 public class ApiResponse<T> {
     // 클라이언트로 나가는 응답
-    private Integer status;
+    private Integer statusCode;
     private String message;
     private T data;
 
     public static ResponseEntity getResponseEntity(Object object) {
         HttpHeaders headers = getHttpHeaders();
         ApiResponse apiResponse = new ApiResponse();
-        apiResponse.setStatus(200);
+        apiResponse.setStatusCode(200);
         apiResponse.setMessage("success");
         apiResponse.setData(object);
         return new ResponseEntity(apiResponse, headers, HttpStatus.OK);
