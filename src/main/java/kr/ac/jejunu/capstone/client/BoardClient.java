@@ -15,9 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
@@ -25,7 +23,7 @@ import static kr.ac.jejunu.capstone.client.utils.ClientUtils.getResponse;
 @Component
 public class BoardClient {
 
-//    private String baseUrl = "http://localhost:8082/parking/v1";
+    //    private String baseUrl = "http://localhost:8082/parking/v1";
     private String baseUrl = "http://125.178.149.31:21152/parking/v1";
 
     public String getBaseUrl() {
@@ -94,33 +92,10 @@ public class BoardClient {
         RestTemplate restTemplate = new RestTemplate();
         byte[] imageBytes = restTemplate.getForObject(reqUrl, byte[].class);
 
-        File cameraImageFile = getFile(String.valueOf(cid));
-        writeImageToFile(imageBytes, cameraImageFile);
+        File cameraImageFile = FileUtils.getFile(String.valueOf(cid),String.valueOf(cid));
+        FileUtils.writeImageToFile(imageBytes, cameraImageFile);
 
         return cameraImageFile.getAbsolutePath();
     }
 
-    private void writeImageToFile(byte[] imageBytes, File fileWriteTest) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(fileWriteTest);
-        fileOutputStream.write(imageBytes);
-        fileOutputStream.close();
-    }
-
-    public File getFile(String directoryName) throws IOException {
-        String path = getPath();
-        File dir = new File(path + "/" + directoryName);
-
-        if (!dir.exists())
-            dir.mkdir();
-
-        File file = new File(path + "/" + directoryName + "/" + directoryName + ".jpeg");
-        if (!file.exists())
-            file.createNewFile();
-
-        return file;
-    }
-
-    private String getPath() {
-        return new File("").getAbsolutePath() + "/src/main/webapp/images/";
-    }
 }

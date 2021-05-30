@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -18,8 +19,8 @@ public class StationController {
     private StationService stationService;
 
     @GetMapping("")
-    public ResponseEntity<ApiResponse> getStationList() {
-        List<StationDto> stations = stationService.getAllNameAndId();
+    public ResponseEntity<ApiResponse> getStationList() throws IOException {
+        List<StationDto> stations = stationService.getAllStations();
         return ApiResponse.getResponseEntity(stations);
     }
 

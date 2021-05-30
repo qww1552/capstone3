@@ -1,6 +1,5 @@
 package kr.ac.jejunu.capstone.model.entity;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -21,10 +20,8 @@ public class Station {
     private Double latitude;
     private Double longitude;
     private String locationDesc;
-    private Double entranceX;
-    private Double entranceY;
-    private Integer width;
-    private Integer height;
+    private Integer row;
+    private Integer column;
 
     private String boardAddress; //보드 주소
 }
