@@ -3,6 +3,7 @@ package kr.ac.jejunu.capstone.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.ac.jejunu.capstone.client.utils.ClientUtils;
+import kr.ac.jejunu.capstone.client.utils.FileUtils;
 import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpotDto;
 import kr.ac.jejunu.capstone.model.dto.send.SendingSpotDto;
 import kr.ac.jejunu.capstone.model.response.received.CameraResponse;
@@ -10,6 +11,7 @@ import kr.ac.jejunu.capstone.model.response.received.SpaceResponse;
 import kr.ac.jejunu.capstone.model.response.received.SpotResponse;
 import kr.ac.jejunu.capstone.model.entity.Camera;
 import kr.ac.jejunu.capstone.model.entity.Spot;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -92,10 +94,9 @@ public class BoardClient {
         RestTemplate restTemplate = new RestTemplate();
         byte[] imageBytes = restTemplate.getForObject(reqUrl, byte[].class);
 
-        File cameraImageFile = FileUtils.getFile(String.valueOf(cid),String.valueOf(cid));
+        File cameraImageFile = FileUtils.getFile("camera_img", String.valueOf(cid));
         FileUtils.writeImageToFile(imageBytes, cameraImageFile);
-
-        return cameraImageFile.getAbsolutePath();
+        return "/images/camera_img/" + cid + ".jpeg";
     }
 
 }

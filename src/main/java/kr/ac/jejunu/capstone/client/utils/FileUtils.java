@@ -1,4 +1,4 @@
-package kr.ac.jejunu.capstone.client;
+package kr.ac.jejunu.capstone.client.utils;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -26,7 +26,7 @@ public class StationController {
 
     @GetMapping("/{stationId}")
     public ResponseEntity getSpots(@PathVariable Integer stationId) {
-        List<ReceivingSpotDto> spotsInStation = stationService.getSpotsInStation(stationId);
+        List<ReceivingSpotDto> spotsInStation = stationService.spotService.getSpotsInStation(stationId);
         return ApiResponse.getResponseEntity(spotsInStation);
     }
 }

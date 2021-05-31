@@ -1,11 +1,9 @@
 package kr.ac.jejunu.capstone.service;
 
-import kr.ac.jejunu.capstone.client.FileUtils;
-import kr.ac.jejunu.capstone.repository.SpotRepository;
+import kr.ac.jejunu.capstone.client.utils.FileUtils;
 import kr.ac.jejunu.capstone.repository.StationRepository;
 import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpotDto;
 import kr.ac.jejunu.capstone.model.dto.send.StationDto;
-import kr.ac.jejunu.capstone.model.entity.Spot;
 import kr.ac.jejunu.capstone.model.entity.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +20,7 @@ public class StationService {
     @Autowired
     private StationRepository stationRepository;
     @Autowired
-    private SpotRepository spotRepository;
+    public SpotService spotService;
 
     public List<StationDto> getAllStations() throws IOException {
         List<Station> stations = stationRepository.findAll();
@@ -33,7 +31,7 @@ public class StationService {
 
             File thumbnails = FileUtils.getFile("thumbnails", String.valueOf(station.getId()));
 
-            stationDto.setThumbnail(thumbnails.getAbsolutePath());
+            stationDto.setThumbnail(String.format("/images/thumbnails/%d.jpeg", station.getId()));
             stationDto.setName(station.getName());
             stationDto.setLatitude(station.getLatitude());
             stationDto.setLongitude(station.getLongitude());
@@ -47,7 +45,7 @@ public class StationService {
     }
 
     public Map<String,Integer> getCapacity(Integer stationId) {
-        List<ReceivingSpotDto> spotsInStation = getSpotsInStation(stationId);
+        List<ReceivingSpotDto> spotsInStation = spotService.getSpotsInStation(stationId);
         int overallSpaces = 0;
         int vacancy = 0;
         for (ReceivingSpotDto receivingSpotDto : spotsInStation) {
@@ -64,17 +62,4 @@ public class StationService {
         return result;
     }
 
-    public List<ReceivingSpotDto> getSpotsInStation(Integer stationId) {
-        List<Spot> spots = spotRepository.findAllByStationId(stationId);
-        List<ReceivingSpotDto> spotDtoList = new ArrayList<>();
-        for (Spot spot: spots) {
-            ReceivingSpotDto spotDto = new ReceivingSpotDto();
-            spotDto.setSid(spot.getSid());
-            spotDto.setSpot(spot.getSpot());
-            spotDto.setFull(spot.getFull());
-
-            spotDtoList.add(spotDto);
-        }
-        return spotDtoList;
-    }
 }

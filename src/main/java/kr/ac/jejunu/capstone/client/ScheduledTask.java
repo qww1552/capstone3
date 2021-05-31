@@ -34,7 +34,7 @@ public class ScheduledTask {
     private StationRepository stationRepository;
 
 
-//    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
 //        Camera camera = null;
 //        try {
