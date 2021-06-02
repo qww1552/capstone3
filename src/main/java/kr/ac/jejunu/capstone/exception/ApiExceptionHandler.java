@@ -33,9 +33,9 @@ public class ApiExceptionHandler {
 
     private ResponseEntity getResponseEntity(HttpStatus httpStatus, String message) {
         ApiException apiException = ApiException.builder()
-                .status(httpStatus.value())
+                .statusCode(httpStatus.value())
                 .message(message)
-                .timestamp(ZonedDateTime.now())
+                .data(ZonedDateTime.now())
                 .build();
         return new ResponseEntity(apiException, httpStatus);
     }

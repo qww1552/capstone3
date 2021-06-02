@@ -69,19 +69,6 @@ public class BoardClient {
     // 스페이스 추가 -수정필요
     public ResponseEntity<String> setSpace(Integer sid, SendingSpotDto sendingSpotDto) throws JsonProcessingException {
         String reqUrl = baseUrl + "/spaces/" + sid;
-//        SendingSpotDto sendingSpotDto = new SendingSpotDto();
-//        sendingSpotDto.setSid(sid);
-//        sendingSpotDto.setSpot(spotList);
-//        ArrayList list = new ArrayList<double[]>();
-//        list.add(new double[]{0.21253672869735563, -0.15404699738903394});
-//        list.add(new double[]{0.28697355533790403, 0.39164490861618795});
-//        list.add(new double[]{0.7688540646425073, 0.39947780678851186});
-//        list.add(new double[]{0.5651322233104799, -0.13315926892950392});
-//
-//        sendingSpotDto.setSpot(list);
-
-//        List spots = new ArrayList<SendingSpotDto>();
-//        spots.add(sendingSpotDto);
 
         ResponseEntity<String> responseEntity =
                 ClientUtils.postResponseForSpace(reqUrl, "space", sendingSpotDto);

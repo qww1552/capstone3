@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 @Builder
 @Getter
 public class ApiException {
-    private final Integer status;
+    private final Integer statusCode;
     private final String message;
-    private final ZonedDateTime timestamp;
+    private final ZonedDateTime data;
 }

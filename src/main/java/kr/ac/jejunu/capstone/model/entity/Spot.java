@@ -26,8 +26,4 @@ public class Spot {
     private Camera camera;
 
     private Boolean full;
-
-    // 보드와 상의 필요할 듯, 일단 임시로 버티컬로 넣음
-    @Column(columnDefinition = "varchar(20) default 'vertical'")
-    private String type;
 }

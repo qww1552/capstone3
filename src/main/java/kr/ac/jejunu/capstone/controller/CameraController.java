@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.io.FileInputStream;
 
 @RequiredArgsConstructor
@@ -20,20 +21,21 @@ public class CameraController {
 
     @GetMapping("/{cameraId}")
     public ResponseEntity getCamera(@PathVariable Integer cameraId) {
-        Camera camera = cameraRepository.findById(cameraId).orElseThrow(()->
+        Camera camera = cameraRepository.findById(cameraId).orElseThrow(() ->
                 new CameraNotFoundException("카메라가 존재하지 않습니다."));
         return ApiResponse.getResponseEntity(camera);
     }
 
-    @GetMapping(value = "/{cameraId}/image",produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/{cameraId}/image", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getCameraImage(@PathVariable Integer cameraId) {
-        Camera camera = cameraRepository.findById(cameraId).orElseThrow(()->
+        Camera camera = cameraRepository.findById(cameraId).orElseThrow(() ->
                 new CameraNotFoundException("카메라가 존재하지 않습니다."));
         String imageUri = camera.getImageUri();
         byte[] bytes = null;
-        try (FileInputStream fileInputStream = new FileInputStream(imageUri)){
+        try (FileInputStream fileInputStream = new FileInputStream(imageUri)) {
             bytes = fileInputStream.readAllBytes();
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
         return bytes;
     }
 
