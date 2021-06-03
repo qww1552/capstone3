@@ -1,15 +1,13 @@
 package kr.ac.jejunu.capstone.model.entity;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
-@RequiredArgsConstructor
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "station")
 public class Station {
 
@@ -20,7 +18,9 @@ public class Station {
     private Double latitude;
     private Double longitude;
     private String locationDesc;
+    @Column(name = "\"row\"")
     private Integer row;
+    @Column(name = "\"column\"")
     private Integer column;
 
     private String boardAddress; //보드 주소

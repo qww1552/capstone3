@@ -34,16 +34,8 @@ public class ScheduledTask {
     private StationRepository stationRepository;
 
 
-    @Scheduled(fixedRate = 5000)
+//    @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
-//        Camera camera = null;
-//        try {
-//            camera = client.getCamera();
-//            camera.setImageUri(client.getCameraImageUri(camera.getCid())); // 이미지는 아직 구현 안함
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        cameraRepository.save(camera);
         List<Station> stations = stationRepository.findAll();
         for (Station station: stations) {
             System.out.println(station);

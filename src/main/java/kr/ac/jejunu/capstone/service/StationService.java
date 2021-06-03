@@ -1,6 +1,5 @@
 package kr.ac.jejunu.capstone.service;
 
-import kr.ac.jejunu.capstone.client.utils.FileUtils;
 import kr.ac.jejunu.capstone.repository.StationRepository;
 import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpotDto;
 import kr.ac.jejunu.capstone.model.dto.send.StationDto;
@@ -8,8 +7,6 @@ import kr.ac.jejunu.capstone.model.entity.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,14 +19,12 @@ public class StationService {
     @Autowired
     public SpotService spotService;
 
-    public List<StationDto> getAllStations() throws IOException {
+    public List<StationDto> getAllStations() {
         List<Station> stations = stationRepository.findAll();
         List<StationDto> stationDtoList = new ArrayList<>();
         for (Station station : stations) {
             StationDto stationDto = new StationDto();
             stationDto.setId(station.getId());
-
-            File thumbnails = FileUtils.getFile("thumbnails", String.valueOf(station.getId()));
 
             stationDto.setThumbnail(String.format("/images/thumbnails/%d.jpeg", station.getId()));
             stationDto.setName(station.getName());
@@ -44,7 +39,7 @@ public class StationService {
         return stationDtoList;
     }
 
-    public Map<String,Integer> getCapacity(Integer stationId) {
+    public Map<String, Integer> getCapacity(Integer stationId) {
         List<ReceivingSpotDto> spotsInStation = spotService.getSpotsInStation(stationId);
         int overallSpaces = 0;
         int vacancy = 0;

@@ -39,8 +39,8 @@ public class SpotService {
             SpotDetail spotDetail = SpotDetail.builder()
                     .slotID(spot.getSid())
                     .photo(String.format("/images/camera_img/%d.jpeg", cameraId))
-                    .posX(0.1)
-                    .posY(0.1)
+                    .posX(spot.getPosX())
+                    .posY(spot.getPosY())
                     .isEmpty(spot.getFull())
                     .slotType("vertical")
                     .build();

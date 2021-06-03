@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 public class SpotDetail {
     private Integer slotID;
     private String photo;
-    private Double posX;
-    private Double posY;
+    private Integer posX;
+    private Integer posY;
     private Boolean isEmpty;
     private String slotType;
 }

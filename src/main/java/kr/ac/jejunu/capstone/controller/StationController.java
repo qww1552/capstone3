@@ -32,7 +32,7 @@ public class StationController {
     private final SpotService spotService;
 
     @GetMapping("")
-    public ResponseEntity<ApiResponse> getStationList() throws IOException {
+    public ResponseEntity getStationList() {
         List<StationDto> stations = stationService.getAllStations();
         return ApiResponse.getResponseEntity(stations);
     }

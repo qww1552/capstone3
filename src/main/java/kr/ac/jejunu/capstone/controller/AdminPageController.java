@@ -25,7 +25,7 @@ public class AdminPageController {
     private final BoardClient boardClient;
 
     // findAll
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity getAllStations() {
         List<Station> stations = stationRepository.findAll();
         return ApiResponse.getResponseEntity(stations);
@@ -40,9 +40,20 @@ public class AdminPageController {
     }
 
     // create
-    @PostMapping("/")
-    public Station addStation(@ModelAttribute Station newStation) {
-        return stationRepository.save(newStation);
+    @PostMapping("")
+    public Station addStation(@RequestBody Map<String,String> newStation) {
+        System.out.println(newStation);
+        Station station = Station.builder()
+                .name(newStation.get("name"))
+                .latitude(Double.valueOf(newStation.get("latitude")))
+                .longitude(Double.valueOf(newStation.get("longitude")))
+                .locationDesc(newStation.get("locationDesc"))
+                .row(Integer.valueOf(newStation.get("row")))
+                .column(Integer.valueOf(newStation.get("column")))
+                .boardAddress(newStation.get("boardAddress"))
+                .build();
+        System.out.println(station);
+        return stationRepository.save(station);
     }
 
     // update
@@ -68,13 +79,15 @@ public class AdminPageController {
                                          @RequestBody Map<String,SendingSpotDto> spaceDto) {
         ResponseEntity<String> responseEntity = null;
         SendingSpotDto sendingSpotDto = spaceDto.get("space");
-        Station station = stationRepository.findById(stationId).get();
+        Station station = stationRepository.findById(stationId).orElseThrow(()->
+                new StationNotFoundException("주차장을 찾을 수 없습니다."));
         boardClient.setBaseUrl(station.getBoardAddress());
         try {
-            responseEntity = boardClient.setSpace(sid, sendingSpotDto); // 보드에 등록만 하고
-        } catch (JsonProcessingException e) {                           // 나중에 순회하면서 db에 저장
+            responseEntity = boardClient.setSpace(sid, sendingSpotDto); // 보드에 등록만 하고 나중에 순회하면서 db에 저장
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
         return ApiResponse.getResponseEntity(sendingSpotDto);
     }
+
 }
