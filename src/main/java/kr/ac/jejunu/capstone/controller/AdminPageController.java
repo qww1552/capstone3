@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +79,7 @@ public class AdminPageController {
                                          @PathVariable Integer sid,
                                          @RequestBody Map<String,SendingSpotDto> spaceDto) {
         ResponseEntity<String> responseEntity = null;
+        System.out.println(spaceDto);
         SendingSpotDto sendingSpotDto = spaceDto.get("space");
         Station station = stationRepository.findById(stationId).orElseThrow(()->
                 new StationNotFoundException("주차장을 찾을 수 없습니다."));

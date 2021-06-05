@@ -4,6 +4,7 @@ import kr.ac.jejunu.capstone.repository.StationRepository;
 import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpotDto;
 import kr.ac.jejunu.capstone.model.dto.send.StationDto;
 import kr.ac.jejunu.capstone.model.entity.Station;
+import kr.ac.jejunu.capstone.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,8 @@ public class StationService {
         for (Station station : stations) {
             StationDto stationDto = new StationDto();
             stationDto.setId(station.getId());
-
-            stationDto.setThumbnail(String.format("/images/thumbnails/%d.jpeg", station.getId()));
+            String imagePath = FileUtils.getImagePath("thumbnails", String.valueOf(station.getId()), "jpeg");
+            stationDto.setThumbnail(imagePath);
             stationDto.setName(station.getName());
             stationDto.setLatitude(station.getLatitude());
             stationDto.setLongitude(station.getLongitude());

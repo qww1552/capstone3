@@ -4,6 +4,7 @@ import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpotDto;
 import kr.ac.jejunu.capstone.model.dto.send.SpotDetail;
 import kr.ac.jejunu.capstone.model.entity.Spot;
 import kr.ac.jejunu.capstone.repository.SpotRepository;
+import kr.ac.jejunu.capstone.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,13 +35,15 @@ public class SpotService {
     public List<SpotDetail> getSpotDetails(Integer stationId) {
         List<Spot> spots = spotRepository.findAllByStationId(stationId);
         List<SpotDetail> spotDtoList = new ArrayList<>();
+        int test = 0;
         for (Spot spot : spots) {
             int cameraId = spot.getCamera().getCid();
+            String imagePath = FileUtils.getImagePath("camera_img", String.valueOf(cameraId), "jpeg");
             SpotDetail spotDetail = SpotDetail.builder()
                     .slotID(spot.getSid())
-                    .photo(String.format("/images/camera_img/%d.jpeg", cameraId))
-                    .posX(spot.getPosX())
-                    .posY(spot.getPosY())
+                    .photo(imagePath)
+                    .posX(test)
+                    .posY(test++)
                     .isEmpty(spot.getFull())
                     .slotType("vertical")
                     .build();

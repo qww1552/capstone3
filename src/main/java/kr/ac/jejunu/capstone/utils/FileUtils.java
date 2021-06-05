@@ -1,5 +1,9 @@
-package kr.ac.jejunu.capstone.client.utils;
+package kr.ac.jejunu.capstone.utils;
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,5 +36,11 @@ public class FileUtils {
     //프로젝트 절대경로
     public static String getPath() {
         return new File("").getAbsolutePath() + "/src/main/webapp/images/";
+    }
+    public static String getImagePath(String directoryName, String fileName, String ext) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String serverUrl = request.getRequestURL().toString().replace(request.getRequestURI(), "");
+        String imagePath = String.format("%s/images/%s/%s.%s", serverUrl, directoryName, fileName, ext);
+        return imagePath;
     }
 }
