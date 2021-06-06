@@ -13,7 +13,8 @@ public class ApiExceptionHandler {
     @ExceptionHandler(value = {
             UserNotExistException.class,
             CameraNotFoundException.class,
-            StationNotFoundException.class})
+            StationNotFoundException.class,
+            SpotNotFoundException.class})
     public ResponseEntity handleNotExistException(Exception e) {
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
         return getResponseEntity(httpStatus, e.getMessage());

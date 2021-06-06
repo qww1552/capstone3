@@ -2,9 +2,13 @@ package kr.ac.jejunu.capstone.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.ac.jejunu.capstone.client.BoardClient;
+import kr.ac.jejunu.capstone.exception.SpotNotFoundException;
 import kr.ac.jejunu.capstone.exception.StationNotFoundException;
+import kr.ac.jejunu.capstone.model.dto.receive.ReceivingSpace;
 import kr.ac.jejunu.capstone.model.dto.send.SendingSpotDto;
+import kr.ac.jejunu.capstone.model.entity.Spot;
 import kr.ac.jejunu.capstone.model.response.ApiResponse;
+import kr.ac.jejunu.capstone.repository.SpotRepository;
 import kr.ac.jejunu.capstone.repository.StationRepository;
 import kr.ac.jejunu.capstone.model.entity.Station;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,6 +27,8 @@ import java.util.Map;
 public class AdminPageController {
     @Autowired
     private final StationRepository stationRepository;
+    @Autowired
+    private final SpotRepository spotRepository;
     @Autowired
     private final BoardClient boardClient;
 
@@ -77,15 +84,18 @@ public class AdminPageController {
     @PostMapping("/{stationId}/{sid}")
     public ResponseEntity<String> setSid(@PathVariable Integer stationId,
                                          @PathVariable Integer sid,
-                                         @RequestBody Map<String,SendingSpotDto> spaceDto) {
-        ResponseEntity<String> responseEntity = null;
-        System.out.println(spaceDto);
-        SendingSpotDto sendingSpotDto = spaceDto.get("space");
+                                         @RequestBody ReceivingSpace receivingSpace) {
+        System.out.println(receivingSpace);
+        SendingSpotDto sendingSpotDto = receivingSpace.getSpace();
         Station station = stationRepository.findById(stationId).orElseThrow(()->
                 new StationNotFoundException("주차장을 찾을 수 없습니다."));
+        Spot spot = spotRepository.findById(sid).orElseThrow(()->new SpotNotFoundException("주차공간이 없습니다."));
+        spot.setPosX(receivingSpace.getPosX());
+        spot.setPosY(receivingSpace.getPosY());
+        spotRepository.save(spot);
         boardClient.setBaseUrl(station.getBoardAddress());
         try {
-            responseEntity = boardClient.setSpace(sid, sendingSpotDto); // 보드에 등록만 하고 나중에 순회하면서 db에 저장
+            boardClient.setSpace(sid, sendingSpotDto); // 보드에 등록만 하고 나중에 순회하면서 db에 저장
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

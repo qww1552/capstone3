@@ -23,7 +23,7 @@ import static kr.ac.jejunu.capstone.utils.ClientUtils.getResponse;
 
 @Component
 public class BoardClient {
-
+    // 보드와 통신하는 객체 빈으로 관리
     //    private String baseUrl = "http://localhost:8082/parking/v1";
     private String baseUrl = "http://125.178.149.31:21152/parking/v1";
 
@@ -45,7 +45,6 @@ public class BoardClient {
     }
 
     // 카메라가 바라보는 영역
-
     public List<ReceivingSpotDto> getSpace() throws JsonProcessingException {
         String resUrl = baseUrl + "/spaces";
 
@@ -65,7 +64,7 @@ public class BoardClient {
         return response.getSpot();
     }
 
-    // 스페이스 추가 -수정필요
+    // 보드에 스페이스 추가 -수정필요
     public ResponseEntity<String> setSpace(Integer sid, SendingSpotDto sendingSpotDto) throws JsonProcessingException {
         String reqUrl = baseUrl + "/spaces/" + sid;
 

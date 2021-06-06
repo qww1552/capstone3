@@ -34,7 +34,7 @@ public class ScheduledTask {
     private StationRepository stationRepository;
 
 
-    @Scheduled(fixedRate = 5000)
+//    @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
         List<Station> stations = stationRepository.findAll();
         for (Station station: stations) {
@@ -58,10 +58,12 @@ public class ScheduledTask {
 
             cameraRepository.save(camera);
 
-            for (ReceivingSpotDto received: receivedSpots) { // 보드에서 받아온 spot들을 entity에 매핑 후 db에 저장
+            for (ReceivingSpotDto received: receivedSpots) {
+                // 보드에서 받아온 spot들을 entity에 매핑 후 db에 저장
                 Spot spot = new Spot();
                 spot.setSid(received.getSid());
-                spot.setSpot(received.getSpot());
+//                spot.setSpot(received.getSpot());
+                spot.setType("vertical");
                 spot.setFull(received.getFull());
 
                 spot.setCamera(camera);

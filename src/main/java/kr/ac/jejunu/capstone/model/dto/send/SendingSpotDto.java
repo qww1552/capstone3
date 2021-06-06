@@ -11,11 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class SendingSpotDto {
+    // 보드에 보내는 객
     // 주차공간 1칸
 
     private Integer sid;
     // 이차원 배열 표현해야함(좌표 4개)
     private List<double[]> spot;
-
-//    private Boolean full;
 }
