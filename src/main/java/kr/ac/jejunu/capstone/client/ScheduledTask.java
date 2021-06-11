@@ -13,6 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,12 +37,10 @@ public class ScheduledTask {
     private StationRepository stationRepository;
 
 
-//    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
         List<Station> stations = stationRepository.findAll();
         for (Station station: stations) {
-            System.out.println(station);
-
             client.setBaseUrl(station.getBoardAddress());
             Camera camera = null;
             try {

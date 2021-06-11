@@ -1,5 +1,6 @@
 package kr.ac.jejunu.capstone.controller;
 
+import kr.ac.jejunu.capstone.configuration.ParkingConfig;
 import kr.ac.jejunu.capstone.exception.StationNotFoundException;
 import kr.ac.jejunu.capstone.model.dto.send.StationDetail;
 import kr.ac.jejunu.capstone.model.dto.send.StationDto;
@@ -10,10 +11,15 @@ import kr.ac.jejunu.capstone.service.SpotService;
 import kr.ac.jejunu.capstone.service.StationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import static kr.ac.jejunu.capstone.utils.FileUtils.getImagePath;

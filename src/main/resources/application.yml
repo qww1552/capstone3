@@ -2,9 +2,10 @@ spring:
   datasource:
     username: test
     password: 1234
-    url: jdbc:mysql://localhost:3306/capstone
+    url: jdbc:mysql://117.17.102.74:3306/capstone?autoReconnect=true
   jpa:
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
 server:
   port: 8080

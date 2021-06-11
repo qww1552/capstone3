@@ -81,6 +81,7 @@ public class BoardClient {
 
         File cameraImageFile = FileUtils.getFile("camera_img", String.valueOf(cid));
         FileUtils.writeImageToFile(imageBytes, cameraImageFile);
+
         return FileUtils.getImagePath("camera_img",String.valueOf(cid),"jpeg");
     }
 

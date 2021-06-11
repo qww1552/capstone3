@@ -35,15 +35,14 @@ public class SpotService {
     public List<SpotDetail> getSpotDetails(Integer stationId) {
         List<Spot> spots = spotRepository.findAllByStationId(stationId);
         List<SpotDetail> spotDtoList = new ArrayList<>();
-        int test = 0;
         for (Spot spot : spots) {
             int cameraId = spot.getCamera().getCid();
             String imagePath = FileUtils.getImagePath("camera_img", String.valueOf(cameraId), "jpeg");
             SpotDetail spotDetail = SpotDetail.builder()
                     .slotID(spot.getSid())
                     .photo(imagePath)
-                    .posX(test)
-                    .posY(test++)
+                    .posX(spot.getPosX())
+                    .posY(spot.getPosY())
                     .isEmpty(spot.getFull())
                     .slotType("vertical")
                     .build();
